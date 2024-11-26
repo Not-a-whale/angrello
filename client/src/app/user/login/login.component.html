@@ -1,0 +1,13 @@
+<mat-card class="max-w-lg mx-auto mt-4 p-8 !bg-white">
+  <form (ngSubmit)="onSubmit()" [formGroup]="form">
+    <div class="text-center mb-6">
+      <h2 class=" text-xl font-semibold text-black">Please enter login credentials</h2>
+      <div>Already have an account?
+        <a routerLink="/signup" class="text-decoration-none fw-medium text-success d-inline-block">Log in</a>
+      </div>
+    </div>
+    <app-text-input formControlName="email" label="Email address"/>
+    <app-text-input formControlName="password" label="Password"/>
+    <button [disabled]="form.invalid" class="w-full py-2 bg-secondary" mat-flat-button type="submit">Register</button>
+  </form>
+</mat-card>
