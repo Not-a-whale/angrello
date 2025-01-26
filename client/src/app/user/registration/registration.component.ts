@@ -1,4 +1,4 @@
-import {Component, inject} from '@angular/core';
+import {Component, inject, OnInit} from '@angular/core';
 import {AbstractControl, FormBuilder, FormGroup, ReactiveFormsModule, Validators} from '@angular/forms';
 import {MatCard} from '@angular/material/card';
 import {MatError, MatFormField, MatLabel} from '@angular/material/form-field';
@@ -9,6 +9,7 @@ import {TextInputComponent} from "../../shared/text-input/text-input.component";
 import {AuthWrapperComponent} from "../auth-wrapper/auth-wrapper.component";
 import {AuthService} from "../../shared/services/auth.service";
 import {ToastrService} from "ngx-toastr";
+import {Router, RouterLink} from "@angular/router";
 
 @Component({
   selector: 'app-registration',
@@ -24,11 +25,12 @@ import {ToastrService} from "ngx-toastr";
     JsonPipe,
     MatError,
     TextInputComponent,
+    RouterLink,
   ],
   templateUrl: './registration.component.html',
   styleUrl: './registration.component.scss',
 })
-export class RegistrationComponent {
+export class RegistrationComponent implements OnInit {
 
   form: FormGroup;
   isSubmitted = false;
@@ -36,6 +38,7 @@ export class RegistrationComponent {
   constructor(
     public formBuilder: FormBuilder,
     private service: AuthService,
+    private router: Router,
     private toastr: ToastrService) {
     this.form = formBuilder.group({
       fullName: ['', Validators.required],
@@ -69,5 +72,10 @@ export class RegistrationComponent {
     return control.get('password')?.value === control.get('confirmPassword')?.value ? null : {mismatch: true};
   }
 
+  ngOnInit() {
+    if (this.service.isLoggedIn()) {
+      this.router.navigateByUrl('/dashboard');
+    }
+  }
 
 }

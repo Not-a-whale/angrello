@@ -1,4 +1,4 @@
-import {Component} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {CommonModule} from "@angular/common";
 import {AbstractControl, FormBuilder, FormGroup, ReactiveFormsModule, Validators} from "@angular/forms";
 import {AuthService} from "../../shared/services/auth.service";
@@ -17,7 +17,7 @@ import {Router, RouterLink} from "@angular/router";
   templateUrl: './login.component.html',
   styleUrl: './login.component.scss'
 })
-export class LoginComponent {
+export class LoginComponent implements OnInit {
 
   form: FormGroup;
   isSubmitted = false;
@@ -26,6 +26,7 @@ export class LoginComponent {
     public formBuilder: FormBuilder,
     private service: AuthService,
     private router: Router,
+    private authService: AuthService,
     private toastr: ToastrService) {
     this.form = formBuilder.group({
       email: ['', [Validators.required]],
@@ -38,7 +39,7 @@ export class LoginComponent {
     if (this.form.valid) {
       this.service.signin(this.form.value).subscribe({
         next: (res: any) => {
-            localStorage.setItem('token', res.token);
+            this.authService.saveToken(res.token);
             this.router.navigateByUrl('/dashboard');
         },
         error: (err: any) => {
@@ -57,5 +58,10 @@ export class LoginComponent {
     return control.get('password')?.value === control.get('confirmPassword')?.value ? null : {mismatch: true};
   }
 
+  ngOnInit() {
+    if (this.authService.isLoggedIn()) {
+      this.router.navigateByUrl('/dashboard');
+    }
+  }
 
 }

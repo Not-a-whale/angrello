@@ -1,0 +1,28 @@
+<header class="border-b shadow-md p-3 w-full max-h-20 fixed top-0 z-1 bg-white">
+  <div class="flex align-middle items-center justify-between max-w-screen-2xl mx-auto">
+    <img alt="app logo" class="max-h-16" src="/assets/images/logo.png"/>
+    <h2 class="text-3xl font-bold text-[#ba005c] pointer-events-none">Angrello App</h2>
+    <div class="flex gap-4">
+      <button class="bg-secondary" mat-flat-button type="button">
+        <mat-icon aria-hidden="false" aria-label="Add Board Icon" fontIcon="add"></mat-icon>
+        Create Board
+      </button>
+      <button class="bg-secondary !p-[12px] !min-w-0" mat-flat-button type="button" (click)="toggleTheme()">
+        <mat-icon aria-hidden="false" aria-label="Sunny theme icon" fontIcon="sunny" class="!m-0"></mat-icon>
+      </button>
+      <button mat-button [matMenuTriggerFor]="menu">
+        <img src="/assets/icons/account_circle_24dp_5F6368_FILL0_wght400_GRAD0_opsz24.svg" />
+      </button>
+      <mat-menu #menu="matMenu">
+        <div class="px-4 pb-2 border-b-2 border-[#ba005c]">
+          <p class="mb-1">User: </p>
+          <p><b>{{userName}}</b></p>
+        </div>
+        <button mat-menu-item>
+          <mat-icon>logout</mat-icon>
+          <span>Logout</span>
+        </button>
+      </mat-menu>
+    </div>
+  </div>
+</header>

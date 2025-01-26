@@ -153,3 +153,4 @@ D:\Projects\angrello\server\server\obj\Debug\net8.0\server.pdb
 D:\Projects\angrello\server\server\obj\Debug\net8.0\server.genruntimeconfig.cache
 D:\Projects\angrello\server\server\obj\Debug\net8.0\ref\server.dll
 D:\Projects\angrello\server\server\bin\Debug\net8.0\Microsoft.AspNetCore.Authentication.JwtBearer.dll
+D:\Projects\angrello\server\server\bin\Debug\net8.0\userdetails.json
